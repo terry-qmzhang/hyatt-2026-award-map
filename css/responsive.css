@@ -1,0 +1,86 @@
+/* Widescreen: >= 1600px */
+@media (min-width: 1600px) {
+  .wrap { padding: 40px 56px 56px; }
+  .map-layout {
+    grid-template-columns: minmax(0, 1.6fr) minmax(420px, 560px);
+    height: clamp(720px, 76vh, 920px);
+  }
+  .top-flat h1 { font-size: 28px; }
+  .top-flat .summary { max-width: 1100px; }
+  .stats { gap: 16px; }
+  .stat { padding: 18px 20px; }
+  .stat .val { font-size: 32px; }
+  .legend { padding: 16px 20px; }
+}
+
+/* Ultra-wide: >= 2200px */
+@media (min-width: 2200px) {
+  .wrap { max-width: 2200px; }
+  .map-layout {
+    grid-template-columns: minmax(0, 1.8fr) minmax(480px, 620px);
+    height: clamp(780px, 78vh, 1000px);
+  }
+}
+
+/* Tablet: <= 1024px */
+@media (max-width: 1024px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+  .map-layout {
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 380px);
+  }
+  .legend { gap: 10px; }
+}
+
+/* Mobile: <= 640px */
+@media (max-width: 640px) {
+  .wrap { padding: 20px 16px 32px; }
+
+  header.top { flex-direction: column; gap: 12px; }
+  .top-right { text-align: left; }
+
+  .stats { grid-template-columns: repeat(2, 1fr); }
+
+  .card-header { padding: 8px 12px; }
+
+  .map-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .map-wrap {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    height: var(--map-height);
+    min-height: var(--map-height);
+  }
+
+  /* Filter toggle visible */
+  .filter-toggle { display: flex; }
+
+  /* Collapsed filter stack */
+  .filter-stack.collapsed .filter-row:not(:first-child) {
+    display: none;
+  }
+
+  .pill-group {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .pill-group .pill {
+    scroll-snap-align: start;
+  }
+
+  .city-select { width: 100%; flex: 1 1 100%; }
+
+  .hotel-rows {
+    max-height: 480px;
+    flex: 0 1 auto;
+  }
+
+  .hl-name-line { font-size: 12px; }
+  .hl-loc { font-size: 10px; }
+  .hl-row { padding: 8px 12px; }
+
+  .legend { padding: 12px; gap: 10px; font-size: 10px; }
+  .filter-stack { padding: 10px; }
+}

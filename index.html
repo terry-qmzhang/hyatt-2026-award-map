@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hyatt 2026 调表 · 142 家酒店全球地图</title>
+<meta property="og:title" content="Hyatt 2026 调表 · 142 家酒店全球地图">
+<meta property="og:description" content="4/24 公告 136 家 + 2/25 提前 7 家。一张图看完哪里涨得最凶。">
+<meta property="og:image" content="https://zqm.ai/misc/hyatt/og.png">
+<meta property="og:url" content="https://zqm.ai/misc/hyatt">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/markers.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="top-flat">
+    <h1>Hyatt 2026 调表</h1>
+    <p class="summary">2026.05.20 起（08:00 CT），凯悦调整 142 家酒店 award chart，含 7 家 2/25 已提前生效。其中 <span id="stat-up">—</span> 家升级（<span id="stat-up-pct">—</span>），<span id="stat-down">—</span> 家降级（<span id="stat-down-pct">—</span>），<span id="stat-cert">—</span> 家失去 1–4 cert 资格，<span id="stat-cat8">—</span> 家升至 Cat 8。点击列表或地图标记查看涨幅明细与 UR 转点损失。</p>
+  </header>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="result-count"><span id="result-n">142</span> / 142 家</div>
+    </div>
+
+    <div class="map-layout">
+      <div class="map-wrap" id="map-wrap">
+        <svg id="map-svg" viewBox="0 0 960 500" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="map-toggle">
+          <div class="pill-group" id="filt-view">
+            <button class="pill active" data-view="flat" title="平铺地图">📊 平铺</button>
+            <button class="pill" data-view="globe" title="立体地球仪">🌍 立体</button>
+          </div>
+          <button class="reset-btn" id="map-reset" title="重置视图">重置</button>
+        </div>
+        <div class="map-zoom">
+          <button class="map-zoom-btn" id="zoom-in" title="放大"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></button>
+          <button class="map-zoom-btn" id="zoom-out" title="缩小"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+        </div>
+      </div>
+      <aside class="right-panel">
+        <div class="filter-stack">
+          <button class="filter-toggle" id="filter-toggle">筛选 ▼</button>
+          <div class="filter-row">
+            <div class="search-wrap">
+              <input type="text" id="search" class="search" placeholder="搜索酒店名、城市…" autocomplete="off">
+            </div>
+            <button class="reset-btn" id="reset">重置</button>
+          </div>
+          <div class="filter-row">
+            <div class="pill-group" id="filt-region">
+              <button class="pill active" data-region="all">All</button>
+              <button class="pill" data-region="AM">美洲</button>
+              <button class="pill" data-region="EU">欧洲</button>
+              <button class="pill" data-region="APME">亚非</button>
+            </div>
+          </div>
+          <div class="filter-row">
+            <div class="pill-group" id="filt-dir">
+              <button class="pill active" data-dir="all">所有</button>
+              <button class="pill" data-dir="up">升</button>
+              <button class="pill" data-dir="down">降</button>
+              <button class="pill" data-dir="cert">失 cert</button>
+            </div>
+            <select id="filt-cat" class="city-select">
+              <option value="">所有等级</option>
+              <option value="4">Cat 4+</option>
+              <option value="5">Cat 5+</option>
+              <option value="6">Cat 6+</option>
+              <option value="7">Cat 7+</option>
+              <option value="8">Cat 8</option>
+            </select>
+            <select id="filt-country" class="city-select"><option value="">所有国家</option></select>
+            <select id="filt-city" class="city-select"><option value="">所有城市</option></select>
+          </div>
+        </div>
+        <div class="list-header">
+          <button class="sort-btn" data-sort="name">酒店</button>
+          <button class="sort-btn col-cat" data-sort="cat">Cat <span class="arrow">↕</span></button>
+          <button class="sort-btn col-pct active" data-sort="pct">标准价 Δ% <span class="arrow">↓</span></button>
+        </div>
+        <div class="hotel-rows" id="hotel-rows"></div>
+      </aside>
+    </div>
+
+    <div class="legend">
+      <span class="legend-label">标准价涨幅</span>
+      <div class="legend-grad-wrap">
+        <div class="legend-grad">
+          <div class="seg" style="background:var(--c-save-deep)"></div>
+          <div class="seg" style="background:var(--c-flat)"></div>
+          <div class="seg" style="background:var(--c-up-small)"></div>
+          <div class="seg" style="background:var(--c-up-mid)"></div>
+          <div class="seg" style="background:var(--c-up-big)"></div>
+        </div>
+        <div class="legend-tick">
+          <span>真省</span><span>假摔</span><span>小涨</span><span>中涨</span><span>暴涨</span>
+        </div>
+      </div>
+      <span class="legend-item"><span class="legend-ring"></span> 失去 1-4 / 1-7 cert</span>
+    </div>
+  </div>
+
+  <footer class="bot">
+    数据来源：<a href="https://world.hyatt.com/content/gp/en/rewards/award-chart-updates.html" target="_blank" rel="noopener">world.hyatt.com/awardchartupdates</a> · 4/24/2026 公告。Δ% 按 <code>Old Standard → New Moderate</code> 计算（中位价口径）。Chase UR 1:1 转 World of Hyatt，UR 多耗 = 单晚点数差额。
+  </footer>
+
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script type="module" src="js/app.js"></script>
+
+</body>
+</html>

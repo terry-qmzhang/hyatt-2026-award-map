@@ -1,0 +1,38 @@
+.sphere { fill: transparent; stroke: var(--border); stroke-width: 0.5; }
+.land { fill: var(--land); stroke: var(--land-stroke); stroke-width: 0.5; }
+.graticule { fill: none; stroke: var(--graticule); stroke-width: 0.5; }
+
+/* Markers */
+.marker { cursor: pointer; }
+.marker .m-fill {
+  transition: r 0.2s, stroke-width 0.2s;
+}
+.marker:hover .m-fill { filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
+.marker.dim { opacity: 0.16; pointer-events: none; }
+.marker.dim .pulse { display: none !important; }
+
+/* Pulse rings */
+.marker .pulse {
+  fill: none;
+  stroke-width: 2;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.marker.active .m-fill {
+  filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.marker.active .pulse-a {
+  animation: pulseRing 1.6s cubic-bezier(0.2, 0.7, 0.3, 1) infinite;
+}
+.marker.active .pulse-b {
+  animation: pulseRing 1.6s cubic-bezier(0.2, 0.7, 0.3, 1) infinite;
+  animation-delay: -0.8s;
+}
+
+@keyframes pulseRing {
+  0%   { transform: scale(0.55); opacity: 0.85; }
+  70%  { opacity: 0.15; }
+  100% { transform: scale(4.2); opacity: 0; }
+}
