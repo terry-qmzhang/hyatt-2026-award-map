@@ -2,7 +2,7 @@
 
 2026 年凯悦（World of Hyatt）积分房价格调整可视化工具。142 家酒店，一张交互地图看完哪里涨得最凶。
 
-**在线访问** &rarr; [zqm.ai/misc/hyatt](https://zqm.ai/misc/hyatt)
+**在线访问** &rarr; [zqm.ai/misc/Hyatt](https://zqm.ai/misc/Hyatt)
 
 ## 数据概况
 
