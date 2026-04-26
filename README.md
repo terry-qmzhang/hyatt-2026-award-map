@@ -56,11 +56,18 @@ hyatt/
 
 ## 本地运行
 
+ES Modules 必须通过 HTTP 加载，直接双击 `index.html` 会报 CORS 错误。
+
 ```bash
-# 任意静态服务器均可，ES Modules 需要 HTTP 协议
-python3 -m http.server 8080
-# 打开 http://localhost:8080
+# 启动静态服务器并自动打开浏览器（macOS）
+python3 -m http.server 8080 & open http://localhost:8080
+
+# 用完后关掉后台服务器
+kill %1
 ```
+
+> **Windows** 用户把 `open` 换成 `start`；**Linux** 用户换成 `xdg-open`。
+> 也可以用 `npx serve`、VS Code Live Server 等任意静态服务器替代。
 
 ## 许可
 
