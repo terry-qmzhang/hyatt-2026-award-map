@@ -1,6 +1,6 @@
 # Hyatt 2026 调表地图
 
-2026 年凯悦（World of Hyatt）积分房价格调整可视化工具。142 家酒店，一张交互地图看完哪里涨得最凶。
+2026 年凯悦（World of Hyatt）积分房价格调整可视化工具。143 家酒店，一张交互地图看完哪里涨得最凶。
 
 **在线访问** &rarr; [zqm.ai/misc/Hyatt](https://zqm.ai/misc/Hyatt)
 
@@ -44,7 +44,7 @@ hyatt/
     responsive.css         # 宽屏 / 平板 / 手机断点
   js/
     config.js              # 常量（动画时长、投影参数等）
-    data.js                # 142 家酒店数据 + 新旧费率表
+    data.js                # 143 家酒店数据 + 新旧费率表
     utils.js               # 纯函数（涨幅计算、颜色映射等）
     state.js               # 筛选状态 + 排序 + 调度
     map.js                 # D3 地图引擎（平铺/立体/变形/缩放）

@@ -44,11 +44,16 @@ function buildTooltipRates(h) {
   return '';
 }
 
+function mapsLink(h) {
+  const q = encodeURIComponent(`${h.n}, ${h.c}`);
+  return `https://www.google.com/maps/search/?api=1&query=${q}`;
+}
+
 export function tooltipHTML(h) {
   const tags = buildTooltipTags(h);
   const rates = buildTooltipRates(h);
   return `
-    <div class="tt-name">${h.n}</div>
+    <div class="tt-name">${h.n} <a class="tt-verify" href="${mapsLink(h)}" target="_blank" rel="noopener" title="在 Google Maps 验证位置">↗</a></div>
     <div class="tt-loc">${h.c}</div>
     <div class="tt-tags">${tags.join('')}</div>
     ${rates}

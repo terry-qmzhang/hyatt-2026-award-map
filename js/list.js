@@ -31,9 +31,10 @@ function buildRowElement(h) {
   const pct = pctText(h);
   const pCls = pctClass(h);
   const pColor = pCls === 'pos' ? colorByPct(h) : (pCls === 'neg' ? 'var(--c-save-deep)' : 'var(--ink-3)');
+  const brandPill = h._brand ? `<span class="brand-pill brand-${h._brand}">${h._brand}</span>` : '';
   row.innerHTML = `
     <div class="hl-name">
-      <div class="hl-name-line">${flags.join('')}<span>${h.n}</span></div>
+      <div class="hl-name-line">${flags.join('')}${brandPill}<span>${h.n}</span></div>
       <div class="hl-loc">${h.c}</div>
     </div>
     <div class="hl-cat">${catText(h)}</div>

@@ -182,6 +182,52 @@
   margin-top: 8px;
 }
 
+/* Google Maps verify link in tooltip */
+.tt-verify {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--ink-3);
+  text-decoration: none;
+  margin-left: 2px;
+  opacity: 0.6;
+  vertical-align: super;
+  font-weight: 400;
+  pointer-events: auto;
+}
+
+/* Brand pills in hotel list */
+.brand-pill {
+  display: inline-block;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  background: var(--surface-2);
+  color: var(--ink-3);
+  border: 1px solid var(--border);
+  margin-right: 4px;
+  flex-shrink: 0;
+  line-height: 1.3;
+  vertical-align: middle;
+}
+.brand-PH { background: rgba(30,30,30,0.08); color: #333; border-color: rgba(30,30,30,0.2); }
+.brand-GH { background: rgba(139,69,19,0.08); color: #8B4513; border-color: rgba(139,69,19,0.2); }
+.brand-HR { background: rgba(0,100,0,0.08); color: #006400; border-color: rgba(0,100,0,0.2); }
+.brand-HC { background: rgba(70,130,180,0.08); color: #4682B4; border-color: rgba(70,130,180,0.2); }
+.brand-HP { background: rgba(65,105,225,0.08); color: #4169E1; border-color: rgba(65,105,225,0.2); }
+.brand-HH { background: rgba(60,179,113,0.08); color: #3CB371; border-color: rgba(60,179,113,0.2); }
+.brand-AZ { background: rgba(220,20,60,0.08); color: #DC143C; border-color: rgba(220,20,60,0.2); }
+.brand-TH { background: rgba(128,0,128,0.08); color: #800080; border-color: rgba(128,0,128,0.2); }
+.brand-JV { background: rgba(184,134,11,0.08); color: #B8860B; border-color: rgba(184,134,11,0.2); }
+.brand-AL { background: rgba(0,128,128,0.08); color: #008080; border-color: rgba(0,128,128,0.2); }
+.brand-TS { background: rgba(255,140,0,0.08); color: #FF8C00; border-color: rgba(255,140,0,0.2); }
+.brand-DR { background: rgba(148,0,211,0.08); color: #9400D3; border-color: rgba(148,0,211,0.2); }
+.brand-SE { background: rgba(178,34,34,0.08); color: #B22222; border-color: rgba(178,34,34,0.2); }
+.brand-AI { background: rgba(255,105,180,0.08); color: #FF69B4; border-color: rgba(255,105,180,0.2); }
+.brand-CB { background: rgba(210,105,30,0.08); color: #D2691E; border-color: rgba(210,105,30,0.2); }
+
 /* Empty state */
 .empty-state {
   padding: 60px 20px;

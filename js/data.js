@@ -1,3 +1,14 @@
+/**
+ * 数据来源 & 审计
+ * ----------------
+ * 主源：world.hyatt.com/content/gp/en/rewards/award-chart-updates.html (2026-04-24)
+ * 中文源：world.hyatt.com/content/gp/zh-hans/rewards/award-chart-updates.html
+ * 交叉验证：TPG, OMAAT, Frequent Miler, 飞常旅客, 抛因特达人
+ * 对比脚本：scripts/diff-official.js (vs official-data.json)
+ * 坐标校验：scripts/audit-coords.js (Nominatim, 50km 阈值)
+ * 最后审计：2026-04-26
+ */
+
 export const OLD_STD = {1:5000,2:8000,3:12000,4:15000,5:20000,6:25000,7:30000,8:40000};
 export const OLD_PK  = {1:6500,2:9500,3:15000,4:18000,5:23000,6:29000,7:35000,8:45000};
 export const NEW_MOD = {1:6000,2:10000,3:15000,4:20000,5:25000,6:30000,7:35000,8:55000};
@@ -76,8 +87,9 @@ export const hotels = [
   {n:"Hyatt House Anchorage",c:"Anchorage, AK",r:"US",lat:61.1814,lng:-149.8859,o:3,nw:4},
   {n:"Hyatt Place Bayam\u00f3n",c:"Bayam\u00f3n, PR",r:"US",lat:18.3989,lng:-66.1614,o:2,nw:3},
   {n:"Hyatt Place Manat\u00ed",c:"Manat\u00ed, PR",r:"US",lat:18.4283,lng:-66.4823,o:2,nw:3},
+  {n:"Hyatt Place Houston NW/Vintage Park",c:"Houston, TX",r:"US",lat:29.9715,lng:-95.5555,o:1,nw:2},
   {n:"Hyatt Place San Antonio-Northwest/Medical Center",c:"San Antonio, TX",r:"US",lat:29.5083,lng:-98.6020,o:1,nw:2,early:true},
-  {n:"The Barnett (JdV by Hyatt)",c:"New York, NY",r:"US",lat:40.7505,lng:-73.9836,o:5,nw:4,early:true},
+  {n:"The Barnett (JdV by Hyatt)",c:"New Orleans, LA",r:"US",lat:29.9511,lng:-90.0715,o:5,nw:4,early:true},
   // ===== Asia-Pacific =====
   {n:"Andaz Macau",c:"Macau, China",r:"AP",lat:22.156,lng:113.555,o:5,nw:4},
   {n:"Andaz Nanjing Hexi",c:"Nanjing, China",r:"AP",lat:32.005,lng:118.741,o:3,nw:2},
@@ -92,7 +104,7 @@ export const hotels = [
   {n:"Hyatt Place Chongli",c:"Chongli, China",r:"AP",lat:40.970,lng:115.270,o:2,nw:1},
   {n:"Hyatt Place Goa Candolim",c:"Goa, India",r:"AP",lat:15.512,lng:73.762,o:1,nw:2},
   {n:"Hyatt Place Kyoto",c:"Kyoto, Japan",r:"AP",lat:35.008,lng:135.762,o:2,nw:3},
-  {n:"Hyatt Regency Beijing Shiyuan",c:"Beijing, China",r:"AP",lat:39.970,lng:116.300,o:3,nw:2},
+  {n:"Hyatt Regency Beijing Shiyuan",c:"Beijing, China",r:"AP",lat:39.970,lng:116.300,o:2,nw:1},
   {n:"Hyatt Regency Dehradun Resort & Spa",c:"Dehradun, India",r:"AP",lat:30.317,lng:78.032,o:2,nw:3},
   {n:"Hyatt Regency Dharamshala Resort",c:"Dharamshala, India",r:"AP",lat:32.219,lng:76.323,o:5,nw:4},
   {n:"Hyatt Regency Kuantan Resort",c:"Kuantan, Malaysia",r:"AP",lat:3.902,lng:103.418,o:1,nw:2},
@@ -155,9 +167,23 @@ export const hotels = [
 
 // Append ", US" to US hotel cities
 hotels.forEach(h => { if(h.r === 'US') h.c += ', US'; });
-// Assign stable index and extract country
+
+// Brand extraction from hotel name
+const BRAND_RE = [
+  [/^Park Hyatt/i,'PH'],[/^Grand Hyatt/i,'GH'],[/^Hyatt Regency/i,'HR'],
+  [/^Hyatt Centric/i,'HC'],[/^Hyatt Place/i,'HP'],[/^Hyatt House/i,'HH'],
+  [/^Hyatt Lodge/i,'HL'],[/^Andaz/i,'AZ'],[/Thompson/i,'TH'],
+  [/JdV|Barnett|Laurel Inn|Carolina Inn/i,'JV'],[/^Caption/i,'CB'],
+  [/^Alila/i,'AL'],[/^The Standard/i,'TS'],[/^Dream/i,'DR'],
+  [/^Secrets/i,'SE'],[/^Hotel F(igueroa|luela)/i,'JV'],[/^Hôtel du Louvre/i,'JV'],
+  [/^Commune/i,'JV'],[/^Ronil/i,'JV'],[/^Story Hotel/i,'JV'],
+  [/^Me and All/i,'JV'],[/^AluaSoul/i,'AI'],[/^Dreams /i,'AI'],
+];
+
+// Assign stable index, extract country and brand
 hotels.forEach((h, i) => {
   h._i = i;
   const parts = h.c.split(', ');
   h._country = parts[parts.length - 1];
+  h._brand = BRAND_RE.find(([r]) => r.test(h.n))?.[1] || 'OT';
 });
